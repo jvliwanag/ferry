@@ -1,0 +1,35 @@
+db:
+  image: "mysql:5.6"
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_USER=openfire
+    - MYSQL_PASSWORD=openfire
+    - MYSQL_DATABASE=openfire
+
+openfire:
+  image: "sameersbn/openfire:3.9.3-2"
+  expose:
+    - 5275 # external component
+    - 5280 # bosh
+  ports:
+    - "9090:9090" # admin
+    - "5222:5222" # xmpp tcp
+    - "5275:5275" # external component
+  links:
+    - "db:db"
+  volumes:
+    - data:/data
+
+videobridge:
+  build: "docker/jitsi-videobridge"
+  net: "host" # temporary workaround until nat is sorted out
+  command: "--secret=secret --domain=jvmeet.sipfoundry.org --host=127.0.0.1 --port=5275"
+
+meet:
+  build: "docker/jitsi-meet"
+  ports:
+    - "80:80"
+  links:
+    - "openfire:xmpp"
+  volumes:
+    - data/meet/config.js:/srv/jitsi-meet/config.js
