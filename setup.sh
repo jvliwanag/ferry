@@ -12,7 +12,15 @@ if [ "$SKIP_PROMPT" != "1" ]; then
   fi
 fi
 
+while [ "$XMPP_DOMAIN" == "" ]; do
+  echo -n "Enter XMPP domain: "
+  read XMPP_DOMAIN
+done
+
 cd "$BASEDIR"
+
+echo "Creating fig.yml..."
+sed "s/%XMPP_DOMAIN%/$XMPP_DOMAIN/g" fig.yml.in > fig.yml
 
 echo "Stopping containers..."
 fig stop
@@ -27,12 +35,11 @@ echo "Copying seed data..."
 
 # meet
 mkdir -p data/meet
-cp -R seed/meet/config.js data/meet
+sed "s/%XMPP_DOMAIN%/$XMPP_DOMAIN/g" seed/meet/config.js.in > data/meet/config.js
 
 # openfire
 mkdir -p data/openfire
 cp -R seed/openfire/etc seed/openfire/lib data/openfire
-
 
 echo "Recreating containers..."
 fig up -d
@@ -47,7 +54,9 @@ echo "Waiting 3s..."
 sleep 3
 
 echo "Loading db seed data..."
-MYSQL_HOST=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ferry_db_1) mysql -uopenfire -popenfire openfire < seed/db/openfire.sql
+sed "s/%XMPP_DOMAIN%/$XMPP_DOMAIN/g" seed/db/openfire.sql.in | \
+ MYSQL_HOST=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ferry_db_1) \
+ mysql -uopenfire -popenfire openfire 
 
 echo "Starting openfire..."
 fig start openfire

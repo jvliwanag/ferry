@@ -1,9 +1,9 @@
 var config = {
     hosts: {
-        domain: 'jvmeet.sipfoundry.org',
+        domain: '%XMPP_DOMAIN%',
         //anonymousdomain: 'guest.example.com',
-        muc: 'conference.jvmeet.sipfoundry.org', // FIXME: use XEP-0030
-        bridge: 'jitsi-videobridge.jvmeet.sipfoundry.org', // FIXME: use XEP-0030
+        muc: 'conference.%XMPP_DOMAIN%', // FIXME: use XEP-0030
+        bridge: 'jitsi-videobridge.%XMPP_DOMAIN%', // FIXME: use XEP-0030
         //call_control: 'callcontrol.jitsi-meet.example.com'
     },
 //  getroomnode: function (path) { return 'someprefixpossiblybasedonpath'; },

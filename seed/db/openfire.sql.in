@@ -457,7 +457,7 @@ CREATE TABLE `ofProperty` (
 
 LOCK TABLES `ofProperty` WRITE;
 /*!40000 ALTER TABLE `ofProperty` DISABLE KEYS */;
-INSERT INTO `ofProperty` VALUES ('httpbind.CORS.domains','*'),('httpbind.CORS.enabled','true'),('httpbind.enabled','true'),('httpbind.forwarded.enabled','false'),('httpbind.port.plain','5280'),('provider.admin.className','org.jivesoftware.openfire.admin.DefaultAdminProvider'),('provider.auth.className','org.jivesoftware.openfire.auth.DefaultAuthProvider'),('provider.group.className','org.jivesoftware.openfire.group.DefaultGroupProvider'),('provider.lockout.className','org.jivesoftware.openfire.lockout.DefaultLockOutProvider'),('provider.securityAudit.className','org.jivesoftware.openfire.security.DefaultSecurityAuditProvider'),('provider.user.className','org.jivesoftware.openfire.user.DefaultUserProvider'),('provider.vcard.className','org.jivesoftware.openfire.vcard.DefaultVCardProvider'),('update.lastCheck','1418132398605'),('xmpp.auth.anonymous','true'),('xmpp.component.defaultSecret','secret'),('xmpp.component.socket.active','true'),('xmpp.domain','jvmeet.sipfoundry.org'),('xmpp.session.conflict-limit','0'),('xmpp.socket.ssl.active','true');
+INSERT INTO `ofProperty` VALUES ('httpbind.CORS.domains','*'),('httpbind.CORS.enabled','true'),('httpbind.enabled','true'),('httpbind.forwarded.enabled','false'),('httpbind.port.plain','5280'),('provider.admin.className','org.jivesoftware.openfire.admin.DefaultAdminProvider'),('provider.auth.className','org.jivesoftware.openfire.auth.DefaultAuthProvider'),('provider.group.className','org.jivesoftware.openfire.group.DefaultGroupProvider'),('provider.lockout.className','org.jivesoftware.openfire.lockout.DefaultLockOutProvider'),('provider.securityAudit.className','org.jivesoftware.openfire.security.DefaultSecurityAuditProvider'),('provider.user.className','org.jivesoftware.openfire.user.DefaultUserProvider'),('provider.vcard.className','org.jivesoftware.openfire.vcard.DefaultVCardProvider'),('update.lastCheck','1418132398605'),('xmpp.auth.anonymous','true'),('xmpp.component.defaultSecret','secret'),('xmpp.component.socket.active','true'),('xmpp.domain','%XMPP_DOMAIN%'),('xmpp.session.conflict-limit','0'),('xmpp.socket.ssl.active','true');
 /*!40000 ALTER TABLE `ofProperty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +483,7 @@ CREATE TABLE `ofPubsubAffiliation` (
 
 LOCK TABLES `ofPubsubAffiliation` WRITE;
 /*!40000 ALTER TABLE `ofPubsubAffiliation` DISABLE KEYS */;
-INSERT INTO `ofPubsubAffiliation` VALUES ('pubsub','','jvmeet.sipfoundry.org','owner');
+INSERT INTO `ofPubsubAffiliation` VALUES ('pubsub','','%XMPP_DOMAIN%','owner');
 /*!40000 ALTER TABLE `ofPubsubAffiliation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -601,7 +601,7 @@ CREATE TABLE `ofPubsubNode` (
 
 LOCK TABLES `ofPubsubNode` WRITE;
 /*!40000 ALTER TABLE `ofPubsubNode` DISABLE KEYS */;
-INSERT INTO `ofPubsubNode` VALUES ('pubsub','',0,'001418132362124','001418132362124',NULL,0,0,0,0,1,1,1,0,0,'publishers',1,0,'open','','','','jvmeet.sipfoundry.org','','English','',NULL,'all',-1);
+INSERT INTO `ofPubsubNode` VALUES ('pubsub','',0,'001418132362124','001418132362124',NULL,0,0,0,0,1,1,1,0,0,'publishers',1,0,'open','','','','%XMPP_DOMAIN%','','English','',NULL,'all',-1);
 /*!40000 ALTER TABLE `ofPubsubNode` ENABLE KEYS */;
 UNLOCK TABLES;
 

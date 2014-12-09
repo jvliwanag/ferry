@@ -23,7 +23,7 @@ openfire:
 videobridge:
   build: "docker/jitsi-videobridge"
   net: "host" # temporary workaround until nat is sorted out
-  command: "--secret=secret --domain=jvmeet.sipfoundry.org --host=127.0.0.1 --port=5275"
+  command: "--secret=secret --domain=%XMPP_DOMAIN% --host=127.0.0.1 --port=5275"
 
 meet:
   build: "docker/jitsi-meet"
