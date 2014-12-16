@@ -1,47 +1,67 @@
 Installation
 ===
 
-0. Install Dependencies
+This was tested on CentOS 7 running on GCE. HTTP traffic must be allowed.
 
-sudo yum install wget
-sudo yum install git
-sudo yum install mysql
+1. Log in as a non-root user with `sudo` privileges.
 
-1. Install Docker
+2. Disable SELinux.
 
-```
-sudo yum -y install docker
-sudo service docker start
-```
+  `sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config`
 
-2. Add user to docker group
+3. Reboot then log back in.
 
-```
-sudo usermod -G docker docker
-# Need to relogin to take effect
-# Once logged in try...
+  `sudo reboot`
 
-docker ps
-```
+4. Install Dependencies
 
-3. Install fig
+  `sudo yum -y install wget git mysql`
 
-```
-sudo wget -O /usr/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
-sudo chmod +x /usr/bin/fig
-```
+5. Install Docker
 
-4. Check out code
+  ```
+  sudo yum -y install docker
+  sudo service docker start
+  sudo chkconfig docker on
+  ```
 
-```
-git clone https://github.com/jvliwanag/ferry.git
-cd ferry
-```
+6. Add user to docker group. Exit then log back in to take effect.
 
-5. Run setup
+  ```
+  sudo usermod -G docker $USER
+  # Need to relogin to take effect
+  exit
+  # Log back in then try:
+  docker ps
+  ```
 
-```
-./setup.sh
-```
+7. Install fig
 
-6. Add domain name to DNS
+  ```
+  sudo wget -O /usr/local/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
+  sudo chmod +x /usr/local/bin/fig
+
+  # test
+  fig -h
+  ```
+
+8. Check out code
+
+  ```
+  git clone https://github.com/jvliwanag/ferry.git
+  cd ferry
+  ```
+
+9. Run setup. Choose a domain name when prompted (e.g. `hello.connecter.io`).
+
+  ```
+  ./setup.sh
+  ```
+
+10. Add your chosen domain name to the DNS server.
+
+11. Open up cloud firewall ports for the server. 10000-20000 / udp.
+
+12. Open Chrome and try visiting `http://<yourdomain>`.
+
+
